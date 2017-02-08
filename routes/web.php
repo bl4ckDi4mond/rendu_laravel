@@ -19,7 +19,11 @@ Route::get('/', function () {
 
 Route::resource('/article', 'ArticleController');
 
+Auth::routes();
 
+Route::get('/home', 'HomeController@index');
+
+Route::get('/user', 'UserController@index');
 
 
 //EXO1
@@ -51,6 +55,3 @@ Route::get('/page1', function() {
 Route::get('/page2', function() {
     return view('exo1.page2');
 });*/
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
