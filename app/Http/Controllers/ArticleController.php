@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -26,7 +27,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
@@ -37,7 +38,24 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required'
+        ],
+        [
+           'content.required' => 'Content obligatoire'
+        ]);
+
+        Article::create([
+           'user_id' => Auth::user()->id,
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
+
+        return redirect()->route('article.index');
+
     }
 
     /**
@@ -83,7 +101,22 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required'
+        ],
+        [
+            'content.required' => 'Content obligatoire'
+        ]);
+
+        $article = Article::find($id);
+
+        $article->title = $request->title;
+        $article->content = $request->content;
+        $article->save();
+
+        return redirect()->route('article.show', [$article->id])->with('success', 'Article modifié');
+
     }
 
     /**
@@ -94,6 +127,11 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = Article::find($id);
+
+        $article->delete();
+
+        return redirect()->route('article.index')->with('success', 'Article supprimé');
+
     }
 }
