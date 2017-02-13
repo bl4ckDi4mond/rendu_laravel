@@ -82,7 +82,9 @@ class ArticleController extends Controller
             return redirect()->route('article.index');
         }
 
-        return view('articles.show', compact('article'));
+        $comments = $article->comments;
+
+        return view('articles.show', compact('article', 'comments'));
     }
 
     /**

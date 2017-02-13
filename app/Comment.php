@@ -14,18 +14,18 @@ class Comment extends Model
      */
 
     protected $fillable = [
-        'content', 'user_id',
+        'content','user_id','article_id',
     ];
 
     /**
      * Get the comments for the blog post.
      */
 
-    public function comments() {
-        return $this -> belongsTo('App/Article');
+    public function article() {
+        return $this->belongsTo('App\Article');
     }
 
     public function user() {
-        return $this -> belongsTo('App/User');
+        return $this->belongsTo('App\User');
     }
 }

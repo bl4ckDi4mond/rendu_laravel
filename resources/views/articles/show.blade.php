@@ -18,18 +18,19 @@
                         <p>{{$article->content}}</p>
                         <p>
                             @if($article->user)
-                                Utilisateur: {{$article->user->name}}
+                                Posté par: {{$article->user->name}}
                             @else
                                 Pas d'utilisateur
                             @endif
                         </p>
                             <div>
                                     <h1> Commentaires : </h1>
-                                @if($article->comment)
-                                    Commentaire: {{$article->comment->content}}
-                                @else
-                                    Pas de commentaires
-                                @endif
+                                @forelse($comments as $comment)
+                                    <h4>Commentaire posté par {{ $comment->user->name }}</h4>
+                                    <p>{{ $comment->content }}</p>
+                                    @empty
+                                    <strong>Cet article n'a fait l'objet d'aucun commentaire(s) !</strong>
+                                @endforelse
 
 
                             </div>
