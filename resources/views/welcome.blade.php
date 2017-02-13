@@ -79,10 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Ceci est un test pour git
-                </div>
-                <div class="title m-b-md">
-                    Ceci est un autre test pour git
+                   Work Hard
                 </div>
 
                 <div class="links">
