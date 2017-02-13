@@ -81,6 +81,9 @@
                 <div class="title m-b-md">
                     Ceci est un test pour git
                 </div>
+                <div class="title m-b-md">
+                    Ceci est un autre test pour git
+                </div>
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
