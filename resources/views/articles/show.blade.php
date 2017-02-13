@@ -23,6 +23,16 @@
                                 Pas d'utilisateur
                             @endif
                         </p>
+                            <div>
+                                    <h1> Commentaires : </h1>
+                                @if($article->comment)
+                                    Commentaire: {{$article->comment->content}}
+                                @else
+                                    Pas de commentaires
+                                @endif
+
+
+                            </div>
                         <a href="{{route('article.index')}}">Retour</a>
                     </div>
                 </div>
