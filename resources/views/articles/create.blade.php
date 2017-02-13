@@ -10,6 +10,7 @@
                     <div class="panel-body">
                         <form method="POST" action="{{route('article.store')}}">
                             {{csrf_field()}}
+                            <input type="file" name="image">
                             <input required type="text" name="title">
                             <textarea name="content" id="" cols="30" rows="10"></textarea>
                             <input type="submit" value="Envoyer">
