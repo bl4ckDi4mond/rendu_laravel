@@ -32,7 +32,7 @@
                                     <strong>Cet article n'a fait l'objet d'aucun commentaire(s) !</strong>
                                 @endforelse
                                 <h1>Laissez un commentaire</h1>
-                                {{ Form::open(['route'=>['comments.create', '$article->id'], 'method'=>'POST'])}}
+                                {{ Form::open(['route'=>['comment.create', $article->id], 'method'=>'POST'])}}
                                 <div class="form-group">
                                     {{ Form::text('comment', '',['form-control'] ) }}
                                 </div>

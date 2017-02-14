@@ -25,10 +25,10 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/user', 'UserController@index');
 
-Route::post('/article/{id}/comments/create', ['as' => 'comments.create', 'uses' => 'CommentController@create']);
+Route::post('/article/{id}/comment/create', ['as' => 'comment.create', 'uses' => 'CommentController@create']);
 
 Route::get('admin', ['middleware' => 'admin', function() {
-    echo 'Bienvenue Admin !';
+
 }]);
 //EXO1
 
