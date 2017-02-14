@@ -10,6 +10,11 @@
                 <div class="panel-body">
                     @if(Auth::check())
                         <h2>Bonjour, {{Auth::user()->name}}</h2>
+                        {{--@if(Auth::guest('is_admin' == 1))--}}
+                            {{--<p>Connecté en tant qu'administrateur</p>--}}
+                        {{--@else--}}
+                            {{--<p>Connecté en tant que membre</p>--}}
+                        {{--@endif--}}
                     @else
                         <h2>Bonjour invité</h2>
                     @endif

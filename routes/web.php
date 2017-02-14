@@ -27,9 +27,9 @@ Route::get('/user', 'UserController@index');
 
 Route::post('/article/{id}/comments/create', ['as' => 'comments.create', 'uses' => 'CommentController@create']);
 
-Route::get('/admin', 'UserController@admin' );
-
-
+Route::get('admin', ['middleware' => 'admin', function() {
+    echo 'Bienvenue Admin !';
+}]);
 //EXO1
 
 /*Route::get('/iim', function() {

@@ -27,8 +27,4 @@ class UserController extends Controller
         return view('users.index');
     }
 
-    public function admin() {
-
-    }
-
 }

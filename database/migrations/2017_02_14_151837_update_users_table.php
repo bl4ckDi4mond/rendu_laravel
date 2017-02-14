@@ -14,7 +14,7 @@ class UpdateUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('is_admin')->unsigned()->after('name');
+            $table->boolean('is_admin')->unsigned()->nullable()->after('name');
         });
     }
 
