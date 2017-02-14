@@ -34,7 +34,7 @@
                                 <h1>Laissez un commentaire</h1>
                                 {{ Form::open(['route'=>['comment.create', $article->id], 'method'=>'POST'])}}
                                 <div class="form-group">
-                                    {{ Form::text('comment', '',['form-control'] ) }}
+                                    {{ Form::text('comment', '', ['class' => 'form-control'] ) }}
                                 </div>
 
                                 {{ Form::submit('Envoyer le commentaire') }}

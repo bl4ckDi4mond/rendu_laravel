@@ -30,6 +30,12 @@ Route::post('/article/{id}/comment/create', ['as' => 'comment.create', 'uses' =>
 Route::get('admin', ['middleware' => 'admin', function() {
 
 }]);
+
+Route::group(['before' => 'admin'], function () {
+   Route::get('admin/comments', ['as' => 'comments.admin', 'uses' => 'CommentController@admin']);
+   Route::put('admin/comments/update/{id}', ['as' => 'comments.update', 'uses' => 'CommentController@update']);
+   Route::delete('admin/comments/delete/{id}', ['as' => 'comments.delete', 'uses' => 'CommentController@delete']);
+});
 //EXO1
 
 /*Route::get('/iim', function() {
