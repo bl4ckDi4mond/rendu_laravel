@@ -25,7 +25,9 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/user', 'UserController@index');
 
-Route::post('/article/{id}/comments/create', 'CommentController@create');
+Route::post('/article/{id}/comments/create', ['as' => 'comments.create', 'uses' => 'CommentController@create']);
+
+Route::get('/admin', 'UserController@admin' );
 
 
 //EXO1
