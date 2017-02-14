@@ -31,10 +31,18 @@
                                     @empty
                                     <strong>Cet article n'a fait l'objet d'aucun commentaire(s) !</strong>
                                 @endforelse
+                                <h1>Laissez un commentaire</h1>
+                                {{ Form::open(['route'=>['comments.create', '$article->id'], 'method'=>'POST'])}}
+                                <div class="form-group">
+                                    {{ Form::text('comment', '',['form-control'] ) }}
+                                </div>
 
+                                {{ Form::submit('Envoyer le commentaire') }}
+
+                                {{ Form::close() }}
 
                             </div>
-                        <a href="{{route('article.index')}}">Retour</a>
+                            <a href="{{route('article.index')}}" class="btn btn-primary">Retour aux articles</a>
                     </div>
                 </div>
             </div>

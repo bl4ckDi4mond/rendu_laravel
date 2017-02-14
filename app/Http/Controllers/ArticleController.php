@@ -118,7 +118,7 @@ class ArticleController extends Controller
             'content' => 'required'
         ],
         [
-            'content.required' => 'Content obligatoire'
+            'content.required' => 'Contenu obligatoire'
         ]);
 
         $article = Article::find($id);
