@@ -19,6 +19,8 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -43,9 +45,10 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        @if (Auth::check())
+                        @if(Auth::check())
                             <li><a href="#">Administration</a></li>
                         @endif
+                        <li><a href="{{ route('article.index') }}">Articles</a></li>
 
                     </ul>
 

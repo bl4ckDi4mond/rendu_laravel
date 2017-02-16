@@ -31,7 +31,7 @@ class Admin
             }
         } else {
             if ($this->auth->user()->is_admin == 1) {
-                die('is admin');
+                die('TA MERE LE TIRET DU 8 PUTIN');
             } else {
                 die('not admin');
             }

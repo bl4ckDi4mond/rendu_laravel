@@ -36,6 +36,10 @@ Route::group(['before' => 'admin'], function () {
    Route::put('admin/comments/update/{id}', ['as' => 'comments.update', 'uses' => 'CommentController@update']);
    Route::delete('admin/comments/delete/{id}', ['as' => 'comments.delete', 'uses' => 'CommentController@delete']);
 });
+
+Route::post('/like', 'LikeController@like');
+Route::post('/unlike', 'LikeController@unlike');
+
 //EXO1
 
 /*Route::get('/iim', function() {

@@ -28,7 +28,7 @@ class CommentController extends Controller
             $comment->content = $request->content;
             $comment->save();
 
-        return redirect()->route('article.show', [$comment->id])->with('success', 'Commentaire modifié');
+        return redirect()->route('comments.admin', [$comment->id])->with('success', 'Commentaire modifié');
     }
 
 

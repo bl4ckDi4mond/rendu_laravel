@@ -146,4 +146,31 @@ class ArticleController extends Controller
         return redirect()->route('article.index')->with('success', 'Article supprimé');
 
     }
+
+    public function isLikedByMe($id)
+    {
+        $article = Article::findOrFail($id)->first();
+        if (Like::whereUserId(Auth::id())->whereArticleId($article->id)->exists()){
+            return 'true';
+        }
+        return 'false';
+    }
+
+    public function like(Article $article)
+    {
+        $existing_like = Like::withTrashed()->wherePostId($article->id)->whereUserId(Auth::id())->first();
+
+        if (is_null($existing_like)) {
+            Like::create([
+                'post_id' => $article->id,
+                'user_id' => Auth::id()
+            ]);
+        } else {
+            if (is_null($existing_like->deleted_at)) {
+                $existing_like->delete();
+            } else {
+                $existing_like->restore();
+            }
+        }
+    }
 }
