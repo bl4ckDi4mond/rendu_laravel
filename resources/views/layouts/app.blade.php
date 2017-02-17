@@ -46,10 +46,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if(Auth::check())
-                            <li><a href="#">Administration</a></li>
-                        @endif
-                        <li><a href="{{ route('article.index') }}">Articles</a></li>
 
+                            <li><a href="{{ route('article.index') }}">Articles</a></li>
+                            @if(Auth::user()->is_admin)
+                            <li><a href="{{ route('comments.admin') }}">Administration</a></li>
+                                @endif
+
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

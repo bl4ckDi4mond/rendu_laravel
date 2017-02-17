@@ -30,10 +30,10 @@ class Admin
                 return redirect()->guest('/login');
             }
         } else {
-            if ($this->auth->user()->is_admin == 1) {
-                die('TA MERE LE TIRET DU 8 PUTIN');
+            if ($this->auth->user()->is_admin) {
+
             } else {
-                die('not admin');
+                die('Accès non autorisé, vous ne disposez pas des droits suffisants');
             }
         }
         return $next($request);

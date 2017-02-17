@@ -27,11 +27,8 @@ Route::get('/user', 'UserController@index');
 
 Route::post('/article/{id}/comment/create', ['as' => 'comment.create', 'uses' => 'CommentController@create']);
 
-Route::get('admin', ['middleware' => 'admin', function() {
 
-}]);
-
-Route::group(['before' => 'admin'], function () {
+Route::group(['middleware' => 'admin'], function () {
    Route::get('admin/comments', ['as' => 'comments.admin', 'uses' => 'CommentController@admin']);
    Route::put('admin/comments/update/{id}', ['as' => 'comments.update', 'uses' => 'CommentController@update']);
    Route::delete('admin/comments/delete/{id}', ['as' => 'comments.delete', 'uses' => 'CommentController@delete']);
