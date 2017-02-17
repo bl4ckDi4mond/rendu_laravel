@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -25,6 +26,15 @@ class UserController extends Controller
     public function index()
     {
         return view('users.index');
+    }
+
+    public function update(Request $request, $id) {
+        $comment = Comment::find($id);
+
+        $comment->content = $request->content;
+        $comment->save();
+
+        return redirect()->route('users.index', [$comment->id])->with('success', 'Commentaire modifié');
     }
 
 }

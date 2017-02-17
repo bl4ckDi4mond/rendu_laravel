@@ -5,6 +5,11 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{session('success')}}
+                        </div>
+                    @endif
                     <div class="panel-heading">Dashboard</div>
 
                     <div class="panel-body">
@@ -16,6 +21,21 @@
                         @empty
                             Rien
                         @endforelse
+
+                        <h1>Mes commentaires</h1>
+                        @forelse(Auth::user()->comments as $comment)
+                            <h3>{{$comment->content}}</h3>
+                            {{ Form::open(['route' => ['users.update', $comment->id], 'method'=> 'put']) }}
+
+                            {{ Form::text('content', '', ['class' => 'form-control']) }}
+
+                            {{ Form::submit('Modifier le commentaire', ['class' => 'btn btn-primary']) }}
+
+                            {{ Form::close() }}
+                        @empty
+                            Rien
+                        @endforelse
+
                     </div>
                 </div>
             </div>

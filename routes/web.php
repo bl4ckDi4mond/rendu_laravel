@@ -23,7 +23,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/user', 'UserController@index');
+Route::get('/user', ['as' => 'users.index', 'uses' => 'UserController@index']);
+
+Route::put('user/comments/update/{id}', ['as' => 'users.update', 'uses' => 'UserController@update']);
 
 Route::post('/article/{id}/comment/create', ['as' => 'comment.create', 'uses' => 'CommentController@create']);
 
