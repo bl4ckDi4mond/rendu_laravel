@@ -19,7 +19,7 @@
                             <h2>{{$article->title}}</h2>
                             <p>{{$article->content}}</p>
                         @empty
-                            Rien
+                            Aucun article(s)
                         @endforelse
 
                         <h1>Mes commentaires</h1>
@@ -33,7 +33,7 @@
 
                             {{ Form::close() }}
                         @empty
-                            Rien
+                            Aucun commentaire(s)
                         @endforelse
 
                     </div>

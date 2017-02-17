@@ -29,6 +29,9 @@ Route::put('user/comments/update/{id}', ['as' => 'users.update', 'uses' => 'User
 
 Route::post('/article/{id}/comment/create', ['as' => 'comment.create', 'uses' => 'CommentController@create']);
 
+Route::get('comment/like/{id}', ['as' => 'comment.like', 'uses' => 'LikeController@likeComment']);
+Route::get('article/like/{id}', ['as' => 'article.like', 'uses' => 'LikeController@likeArticle']);
+
 
 Route::group(['middleware' => 'admin'], function () {
    Route::get('admin/comments', ['as' => 'comments.admin', 'uses' => 'CommentController@admin']);

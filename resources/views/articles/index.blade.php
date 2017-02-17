@@ -17,9 +17,17 @@
                         @forelse($articles as $article)
                             <h1>{{ $article->title }}</h1>
                             <p>{{ $article->content }}</p>
-                            <a href="{{route('article.show', ['id' => $article->id])}}">
-                                Voir mon article
-                            </a>
+                            <a href="{{route('article.show', ['id' => $article->id])}}"><button class="btn btn-primary">
+                                Voir l'article
+                            </button></a>
+                                @foreach ($article->likes as $user)
+                                    {{ $user->name }} likes this !
+                                @endforeach
+                                @if ($article->isLiked)
+                                    <a href="{{ route('article.like', $article->id) }}">Unlike this shit</a>
+                                @else
+                                    <a href="{{ route('article.like', $article->id) }}">Like this awesome product!</a>
+                                @endif
                         @empty
                             Rien du tout
                         @endforelse

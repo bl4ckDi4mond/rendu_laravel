@@ -2,37 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Like;
+use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
-    public function like(){
+    public function likeComment($id)
+    {
+        // here you can check if product exists or is valid or whatever
 
-        if(Input::has("article_id")){
-
-            $article_id=explode("_",Input::get("article_id"));
-
-            //Find if user already liked the article
-            if(Likes::where("article_id",$article_id[1])->where("user_id","1")->count()>0){
-                Likes::where("article_id",$article_id[1])->where("user_id","1")->delete();
-                return Response::json(array("result"=>"1","isunlike"=>"0","text"=>"Like"));
-            }else{
-                $like=new Likes();
-                //We are using hardcoded user id for now , in production change
-                //it to Sentry::getId() if using Sentry for authentication
-                $like->user_id="1";
-                $like->article_id=$article_id[1];
-                $like->save();
-
-                return Response::json(array("result"=>"1","isunlike"=>"1","text"=>"unlike"));
-            }
-
-            return Response::json(array("result"=>"1","isunlike"=>"1","text"=>"unlike"));
-        }else{
-            //No article id no access sorry
-            return Response::json(array("result"=>"0"));
-        }
-
+        $this->handleLike('App\Comment', $id);
+        return redirect()->back();
     }
 
+    public function likeArticle($id)
+    {
+        // here you can check if product exists or is valid or whatever
+
+        $this->handleLike('App\Article', $id);
+        return redirect()->back();
+    }
+
+    public function handleLike($type, $id)
+    {
+        $existing_like = Like::withTrashed()->whereLikeType($type)->whereLikeId($id)->whereUserId(Auth::id())->first();
+
+        if (is_null($existing_like)) {
+            Like::create([
+                'user_id'   => Auth::id(),
+                'like_id'   => $id,
+                'like_type' => $type,
+            ]);
+        } else {
+            if (is_null($existing_like->deleted_at)) {
+                $existing_like->delete();
+            } else {
+                $existing_like->restore();
+            }
+        }
+    }
 }
