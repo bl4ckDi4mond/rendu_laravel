@@ -59,6 +59,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
+                            <a href="{{ url('/contact') }}">Contactez-nous</a>
                             <li><a href="{{ route('login') }}">Se connecter</a></li>
                             <li><a href="{{ route('register') }}">Créer un compte</a></li>
                         @else
@@ -68,6 +69,9 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li> <a href="{{ url('/contact') }}"><span style="margin: 5px;" class="glyphicon glyphicon-user" aria-hidden="true"></span>Contactez-nous</a></li>
+
+                                    <li> <a href="{{ url('/article/create') }}"><span style="margin: 5px;" class="glyphicon glyphicon-user" aria-hidden="true"></span>Ecrire un article</a></li>
 
                                     <li><a href="{{ route('users.index') }}"><span style="margin: 5px;" class="glyphicon glyphicon-user" aria-hidden="true"></span>Mon profil</a></li>
 

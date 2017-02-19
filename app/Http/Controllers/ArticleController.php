@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class ArticleController extends Controller
 {
@@ -38,7 +39,46 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required'
+        ],
+            [
+                'content.required' => 'Content obligatoire'
+            ]);
+
+        $article = new Article();
+
+        $article->user_id = Auth::user()->id;
+        $article->title = $request->title;
+        $article->content = $request->content;
+
+
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/' . $filename);
+            Image::make($image)->resize(800, 400)->save($location);
+
+            $article->image = $filename;
+        };
+
+        $article->save();
+
+
+
+        /*         ANCIENNE VERSION
+
+        Article::create([
+            'user_id' => Auth::user()->id,
+            'title' => $request->title,
+            'content' => $request->content,
+            'image' => $filename
+        ]);
+*/
+
+
+
         return redirect()->route('article.index');
 
     }

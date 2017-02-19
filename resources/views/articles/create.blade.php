@@ -8,7 +8,7 @@
                     <div class="panel-heading">Dashboard</div>
 
                     <div class="panel-body">
-                        <form method="POST" action="{{route('article.store')}}">
+                        <form method="POST" enctype="multipart/form-data" action="{{route('article.store')}}">
                             {{csrf_field()}}
                             <input type="file" name="image">
                             <input required type="text" name="title">

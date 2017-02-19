@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard</div>
+                    <div class="panel-heading">Article</div>
 
                     <div class="panel-body">
                         @if(session('success'))
@@ -13,6 +13,11 @@
                                 {{session('success')}}
                             </div>
                         @endif
+
+                            @if(!empty($article->image))
+                                <img src="{{ asset('images/' . $article->image) }}" width="720" height="340" />
+                            @endif
+
 
                         <h1>{{$article->title}}</h1>
                         <p>{{$article->content}}</p>
@@ -24,7 +29,7 @@
                             @endif
                         </p>
                             <div>
-                                    <h1> Commentaires : </h1>
+                                    <h2> Commentaires : </h2>
                                 @forelse($comments as $comment)
                                     <h4>Commentaire posté par {{ $comment->user->name }}</h4>
                                     <p>{{ $comment->content }}</p>
@@ -34,7 +39,7 @@
                                     @empty
                                     <strong>Cet article n'a fait l'objet d'aucun commentaire(s) !</strong>
                                 @endforelse
-                                <h1>Laissez un commentaire</h1>
+                                <h3>Laissez un commentaire</h3>
                                 {{ Form::open(['route'=>['comment.create', $article->id], 'method'=>'POST', 'files' => true])}}
                                 <div class="form-group">
 

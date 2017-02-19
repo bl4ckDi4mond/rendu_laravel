@@ -69,8 +69,10 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
+                        <a href="{{ url('/contact') }}">Contactez-nous</a>
                         <a href="{{ url('/home') }}">Accueil</a>
                     @else
+                        <a href="{{ url('/contact') }}">Contactez-nous</a>
                         <a href="{{ url('/login') }}">Se connecter</a>
                         <a href="{{ url('/register') }}">Créer un compte</a>
                     @endif
