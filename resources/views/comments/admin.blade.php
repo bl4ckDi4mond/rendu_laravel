@@ -19,7 +19,14 @@
             <tbody>
             @forelse($comments as $comment)
             <tr>
-                <td>{{ $comment->content }}</td>
+                <td> {{ $comment->content }}<br><br>
+                    @if(!empty($comment->image))
+                        <div>
+                        <strong>Image lié au commentaire :</strong>
+                        <img src="{{ asset('images/' . $comment->image) }}" width="160" height="120" />
+                        </div>
+                    @endif
+                </td>
                 <td>{{ Form::open(['route' => ['comments.update', $comment->id], 'method'=> 'put']) }}
 
                     {{ Form::text('content', '', ['class' => 'form-control']) }}

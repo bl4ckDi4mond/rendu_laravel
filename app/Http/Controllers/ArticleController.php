@@ -39,31 +39,8 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, [
-            'title' => 'required',
-            'content' => 'required'
-        ],
-        [
-           'content.required' => 'Content obligatoire'
-        ]);
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = $image->getClientOriginalExtension();
-            $location = public_path('images/' . $image->getClientOriginalExtension());
-            Image::make($image)->resize(1200, 400)->save($location);
-        }
-
-        Article::create([
-            'user_id' => Auth::user()->id,
-            'title' => $request->title,
-            'content' => $request->content,
-            'image' => public_path('images/' . $image->getClientOriginalExtension())
-        ]);
-
-
-
-
+//
+        
         return redirect()->route('article.index');
 
     }

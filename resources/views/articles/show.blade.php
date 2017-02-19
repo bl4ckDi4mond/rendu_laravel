@@ -28,54 +28,26 @@
                                 @forelse($comments as $comment)
                                     <h4>Commentaire posté par {{ $comment->user->name }}</h4>
                                     <p>{{ $comment->content }}</p>
-                                    {{-- Test Like button --}}
-
-                                    <a href="#" id="like" class="btn btn-success btn-md ladda-button ajax-like" data-style="slide-right" data-size="l"><span class="ladda-label">Like</span></a>
-                                    <script type="text/javascript">
-                                        $(function() {
-                                            $('.ajax-like').click(function(e) {
-                                                e.preventDefault();
-                                                var l = Ladda.create(this);
-                                                var id=$(this).attr("id");
-                                                l.start();
-                                                $.article("/like", {
-                                                    "article_id" : $(this).attr("id")
-                                                }, function(response) {
-                                                    if(response.result!=null&&response.result=="1"){
-                                                        if(response.isunlike=="1"){
-                                                            $("#"+id).removeClass("btn-success");
-                                                            $("#"+id).addClass("btn-danger");
-                                                            $("#"+id).html(response.text);
-                                                        }else{
-                                                            $("#"+id).removeClass('btn-danger');
-                                                            $("#"+id).addClass("btn-success");
-                                                            $("#"+id).html(response.text);
-                                                        }
-                                                    }else{
-                                                        alert("Server Error");
-                                                    }
-                                                }, "json").always(function() {
-                                                    l.stop();
-                                                });
-                                                return false;
-                                            });
-                                        });
-                                    </script>
-
-                                    {{-- Fin Test Like button --}}
+                                    @if(! empty($comment->image))
+                                    <img src="{{ asset('images/' . $comment->image) }}" width="320" height="240" />
+                                    @endif
                                     @empty
                                     <strong>Cet article n'a fait l'objet d'aucun commentaire(s) !</strong>
                                 @endforelse
                                 <h1>Laissez un commentaire</h1>
-                                {{ Form::open(['route'=>['comment.create', $article->id], 'method'=>'POST'])}}
+                                {{ Form::open(['route'=>['comment.create', $article->id], 'method'=>'POST', 'files' => true])}}
                                 <div class="form-group">
-                                    {{ Form::text('comment', '', ['class' => 'form-control'] ) }}
-                                </div>
+
+                                    {{ Form::text('content', '', ['class' => 'form-control'] ) }}
+
+
+                                    {{ Form::file('image') }}
+
 
                                 {{ Form::submit('Envoyer le commentaire') }}
 
                                 {{ Form::close() }}
-
+                                </div>
                             </div>
                             <a href="{{route('article.index')}}" class="btn btn-primary">Retour aux articles</a>
                     </div>

@@ -24,7 +24,7 @@
                                     {{ $user->name }} likes this !
                                 @endforeach
                                 @if ($article->isLiked)
-                                    <a href="{{ route('article.like', $article->id) }}">Unlike this shit</a>
+                                    <a href="{{ route('article.like', $article->id) }}">Unlike this</a>
                                 @else
                                     <a href="{{ route('article.like', $article->id) }}">Like this awesome product!</a>
                                 @endif

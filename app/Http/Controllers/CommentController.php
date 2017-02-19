@@ -6,7 +6,7 @@ use App\Article;
 use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
+use Intervention\Image\Facades\Image;
 
 class CommentController extends Controller
 {
@@ -32,16 +32,50 @@ class CommentController extends Controller
     }
 
 
-    public function create($id) {
+    public function create(Request $request, $id) {
+
+        //Ancienne Methode
+
+//        $article = Article::find($id);
+//        $inputs = Input::all();
+//
+//            $image = $request->file('image');
+//            $filename = time() . '.' . $image->getClientOriginalExtension();
+//            $location = public_path('images/' . $filename);
+//
+//        Comment::create([
+//            'user_id' => Auth::user()->id,
+//            'article_id' => $article->id,
+//            'content' => $inputs['content'],
+//            'image' => Image::make($image)->resize(800, 400)->save($location)
+//        ]);
+
+        $this->validate($request, array(
+            'content'=> 'required'
+        ));
 
         $article = Article::find($id);
-        $inputs = Input::all();
 
-        Comment::create([
-            'user_id' => Auth::user()->id,
-            'article_id' => $article->id,
-            'content' => $inputs['comment'],
-        ]);
+        $comment = new Comment();
+
+        $comment->user_id = Auth::user()->id;
+        $comment->article_id = $article->id;
+        $comment->content = $request->content;
+
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/' . $filename);
+            Image::make($image)->resize(800, 400)->save($location);
+
+            $comment->image = $filename;
+        }
+
+        $comment->article()->associate($article);
+
+        $comment->save();
+
+
         return redirect()->route('article.show', [$article->id])->with('success', 'Commentaire ajouté');
     }
 }
