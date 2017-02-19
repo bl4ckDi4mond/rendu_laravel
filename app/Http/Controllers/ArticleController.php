@@ -38,8 +38,6 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-
-//
         
         return redirect()->route('article.index');
 

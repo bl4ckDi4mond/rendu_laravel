@@ -42,6 +42,11 @@ Route::group(['middleware' => 'admin'], function () {
 Route::post('/like', 'LikeController@like');
 Route::post('/unlike', 'LikeController@unlike');
 
+Route::get('contact',
+    ['as' => 'contact', 'uses' => 'AboutController@create']);
+Route::post('contact',
+    ['as' => 'contact_store', 'uses' => 'AboutController@store']);
+
 //EXO1
 
 /*Route::get('/iim', function() {
