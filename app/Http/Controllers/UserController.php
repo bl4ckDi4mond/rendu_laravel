@@ -30,7 +30,6 @@ class UserController extends Controller
 
     public function update(Request $request, $id) {
         $comment = Comment::find($id);
-
         $comment->content = $request->content;
         $comment->save();
 
